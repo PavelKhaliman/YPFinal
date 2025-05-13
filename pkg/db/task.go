@@ -22,10 +22,12 @@ func AddTask(task *Task) (int64, error) {
 	}
 	return id, err
 }
-func Tasks(limit int) ([]*Task, error) {
-
+func Tasks(limit int, sort string) ([]*Task, error) {
+	if sort != "asc" && sort != "desc" {
+		sort = "asc"
+	}
 	query := `SELECT id, date, title, comment, repeat FROM scheduler`
-
+	query = fmt.Sprintf("%s ORDER BY date %s", query, sort)
 	if limit > 0 {
 		query = fmt.Sprintf("%s LIMIT %d", query, limit)
 	}

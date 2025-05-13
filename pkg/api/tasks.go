@@ -20,7 +20,14 @@ func tasksHandler(w http.ResponseWriter, r *http.Request) {
 		writeJSONError(w, http.StatusMethodNotAllowed, fmt.Errorf("метод %s не разрешен", r.Method))
 		return
 	}
-	tasks, err := db.Tasks(50) // в параметре максимальное количество записей
+
+	//подсмотрел как сделать сортировку надеюсь таким методом это реализовывать правильно
+
+	sort := r.URL.Query().Get("sort")
+	if sort == "" {
+		sort = "asc"
+	}
+	tasks, err := db.Tasks(50, sort) // в параметре максимальное количество записей
 	if err != nil {
 		// здесь вызываете функцию, которая возвращает ошибку в JSON
 		// её желательно было реализовать на предыдущем шаге

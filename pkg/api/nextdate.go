@@ -61,7 +61,7 @@ func NextDate(now time.Time, dstart string, repeat string) (string, error) {
 			return "ошибка преобразования", err
 		}
 		if days <= 0 || days > 400 {
-			return "Максимально допустимое число равно 400", err
+			return "максимально допустимое число равно 400", err
 		}
 
 		for {
@@ -81,7 +81,7 @@ func NextDate(now time.Time, dstart string, repeat string) (string, error) {
 func nextDateHandler(w http.ResponseWriter, r *http.Request) {
 	// Проверяем запрос на GET
 	if r.Method != http.MethodGet {
-		http.Error(w, "Ошибка запроса", http.StatusMethodNotAllowed)
+		http.Error(w, "ошибка запроса", http.StatusMethodNotAllowed)
 		return
 	}
 

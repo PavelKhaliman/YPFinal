@@ -16,6 +16,9 @@ func taskHandler(w http.ResponseWriter, r *http.Request) {
 	//DELETE
 	case http.MethodDelete:
 		deleteTaskHandler(w, r)
+
+	default:
+		http.Error(w, "error 405 Method Not Allowed", http.StatusMethodNotAllowed)
 	}
 }
 

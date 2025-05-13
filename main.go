@@ -12,11 +12,19 @@ func main() {
 	//Инициализация БД
 	fmt.Println("Инициализируем БД")
 
-	db.Init("scheduler.db")
+	errDb := db.Init("scheduler.db")
+	if errDb != nil {
+		fmt.Println("ошибка при инициализации БД")
+		return
+	}
 	api.Init()
+
 	//Запуск сервера
 	fmt.Println("Запуск сервера")
 
-	server.Run()
-
+	errSrv := server.Run()
+	if errSrv != nil {
+		fmt.Println("Ошибка при запуске сервера")
+		return
+	}
 }
